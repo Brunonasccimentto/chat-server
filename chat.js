@@ -5,7 +5,14 @@ const cors = require("cors")
 
 const app = express()
 
-app.use(cors())
+app.use(
+    cors({
+      origin: ["*"],
+      methods: ["GET", "POST", "DELETE"],
+      credentials: true,
+      origin: true,
+    })
+  );
 
 const messages = []
 
@@ -13,8 +20,9 @@ const server = http.createServer(app)
 
 const io = new Server(server, {
     cors: {
-        origin: "https://brunonasccimentto.github.io",
+        origin: "*",
         methods: ["GET, POST"],
+        credentials: true,
     },   
 })
 
