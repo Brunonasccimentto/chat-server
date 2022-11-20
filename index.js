@@ -2,8 +2,12 @@ const express = require("express")
 const {Server} = require("socket.io")
 const http = require("http")
 const cors = require("cors")
+require("dotenv").config()
 
 const app = express()
+app.use(express.json())
+
+app.use(cors())
 
 const messages = []
 
@@ -23,7 +27,7 @@ const io = new Server(server, {
     }   
 })
 
-server.listen(3001, ()=>{
+server.listen(process.env.PORT, ()=>{
     console.log("server running")
 })
 
@@ -34,7 +38,6 @@ io.on("connection", (socket)=>{
     socket.on("new_message", (data)=>{
         
         messages.push(data)
-        console.log(data)
         io.emit("update_messages", messages)
     })
 })
