@@ -5,18 +5,14 @@ const cors = require("cors")
 
 const app = express()
 
-app.use(cors())
-
 const messages = []
 
 const server = http.createServer(app)
 
 app.get("/", (req, res) =>{
-    console.log(res)
-    res.send("aqui")
+    res.write(`<h1> socket run </h1>`)
+    res.end()
 })
-
-io.use(cors())
 
 const io = new Server(server, {
     cors: {
@@ -24,7 +20,7 @@ const io = new Server(server, {
         methods: ["GET, POST"],
         credentials: true,
         allowedHeaders: ["authorization"]
-    },   
+    }   
 })
 
 server.listen(3001, ()=>{
