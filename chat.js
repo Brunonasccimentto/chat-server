@@ -5,12 +5,18 @@ const cors = require("cors")
 
 const app = express()
 
-const server = http.createServer(app)
 app.use(cors())
 
 const messages = []
 
-const io = new Server(server)
+const server = http.createServer(app)
+
+const io = new Server(server, {
+    cors: {
+        origin: "https://brunonasccimentto.github.io",
+        methods: ["GET, POST"],
+    },   
+})
 
 server.listen(3001, ()=>{
     console.log("server running")
