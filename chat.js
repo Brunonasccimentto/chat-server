@@ -5,25 +5,24 @@ const cors = require("cors")
 
 const app = express()
 
-app.use(
-    cors({
-      origin: ["*"],
-      methods: ["GET", "POST", "DELETE"],
-      credentials: true,
-      origin: true,
-    })
-  );
+const corsOptions ={
+    origin:'*', 
+    credentials:true,            //access-control-allow-credentials:true
+    optionSuccessStatus:200,
+ }
+
+app.use(cors(corsOptions))
 
 const messages = []
 
 const server = http.createServer(app)
 
 const io = new Server(server, {
-    cors: {
-        origin: "*",
-        methods: ["GET, POST"],
-        credentials: true,
-    },   
+    // cors: {
+    //     origin: "*",
+    //     methods: ["GET, POST"],
+    //     credentials: true,
+    // },   
 })
 
 server.listen(3001, ()=>{
