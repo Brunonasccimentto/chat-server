@@ -5,11 +5,10 @@ const cors = require("cors")
 
 const app = express()
 
+const server = http.createServer(app)
 app.use(cors())
 
 const messages = []
-
-const server = http.createServer(app)
 
 const io = new Server(server)
 
