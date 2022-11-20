@@ -11,12 +11,7 @@ const messages = []
 
 const server = http.createServer(app)
 
-const io = new Server(server, {
-    cors: {
-        origin: "https://brunonasccimentto.github.io/chat/",
-        methods: ["GET, POST"],
-    },   
-})
+const io = new Server(server)
 
 server.listen(3001, ()=>{
     console.log("server running")
