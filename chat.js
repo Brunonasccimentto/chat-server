@@ -7,17 +7,16 @@ const app = express()
 
 app.use(cors())
 
-app.all('*', function(req, res, next) {
-    var origin = req.get('origin'); 
-    res.header('Access-Control-Allow-Origin', origin);
-    res.header("Access-Control-Allow-Headers", "X-Requested-With");
-    res.header('Access-Control-Allow-Headers', 'Content-Type');
-    next();
-});
-
 const messages = []
 
 const server = http.createServer(app)
+
+app.get("/", (req, res) =>{
+    console.log(res)
+    res.send("aqui")
+})
+
+io.use(cors())
 
 const io = new Server(server, {
     cors: {
@@ -38,8 +37,6 @@ io.on("connection", (socket)=>{
 
     socket.on("new_message", (data)=>{
         
-        // messages.push(data.msg)
-        // io.emit("update_messages", messages)
         messages.push(data)
         console.log(data)
         io.emit("update_messages", messages)
